@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DocNetFinalModelStoreContainer" CdmEntityContainer="DocNetFinalDataBase">
+    <EntitySetMapping Name="BuffetTickets">
+      <EntityTypeMapping TypeName="DocNetFinalModel.BuffetTicket">
+        <MappingFragment StoreEntitySet="BuffetTicket">
+          <ScalarProperty Name="BuffetTicketID" ColumnName="BuffetTicketID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuffetTicketMenuItems">
+      <EntityTypeMapping TypeName="DocNetFinalModel.BuffetTicketMenuItem">
+        <MappingFragment StoreEntitySet="BuffetTicketMenuItem">
+          <ScalarProperty Name="BuffetTicketMenuItemID" ColumnName="BuffetTicketMenuItemID" />
+          <ScalarProperty Name="BuffetTicketID" ColumnName="BuffetTicketID" />
+          <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuffetTicketTimeSlots">
+      <EntityTypeMapping TypeName="DocNetFinalModel.BuffetTicketTimeSlot">
+        <MappingFragment StoreEntitySet="BuffetTicketTimeSlot">
+          <ScalarProperty Name="BuffetTicketTimeSlotID" ColumnName="BuffetTicketTimeSlotID" />
+          <ScalarProperty Name="BuffetTicketID" ColumnName="BuffetTicketID" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryFoods">
+      <EntityTypeMapping TypeName="DocNetFinalModel.CategoryFood">
+        <MappingFragment StoreEntitySet="CategoryFood">
+          <ScalarProperty Name="CategoryFoodID" ColumnName="CategoryFoodID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuItems">
+      <EntityTypeMapping TypeName="DocNetFinalModel.MenuItem">
+        <MappingFragment StoreEntitySet="MenuItem">
+          <ScalarProperty Name="MenuItemID" ColumnName="MenuItemID" />
+          <ScalarProperty Name="CategoryFoodID" ColumnName="CategoryFoodID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServingTables">
+      <EntityTypeMapping TypeName="DocNetFinalModel.ServingTable">
+        <MappingFragment StoreEntitySet="ServingTable">
+          <ScalarProperty Name="ServingTableID" ColumnName="ServingTableID" />
+          <ScalarProperty Name="ServingTableCode" ColumnName="ServingTableCode" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

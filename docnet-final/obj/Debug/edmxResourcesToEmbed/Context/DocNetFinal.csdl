@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DocNetFinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BuffetTicket">
+    <Key>
+      <PropertyRef Name="BuffetTicketID" />
+    </Key>
+    <Property Name="BuffetTicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="BuffetTicketMenuItems" Relationship="Self.FK_BuffetTicketMenuItem_BuffetTicket" FromRole="BuffetTicket" ToRole="BuffetTicketMenuItem" />
+    <NavigationProperty Name="BuffetTicketTimeSlots" Relationship="Self.FK_BuffetTicketTimeSlot_BuffetTicket" FromRole="BuffetTicket" ToRole="BuffetTicketTimeSlot" />
+  </EntityType>
+  <EntityType Name="BuffetTicketMenuItem">
+    <Key>
+      <PropertyRef Name="BuffetTicketMenuItemID" />
+    </Key>
+    <Property Name="BuffetTicketMenuItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuffetTicketID" Type="Int32" Nullable="false" />
+    <Property Name="MenuItemID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BuffetTicket" Relationship="Self.FK_BuffetTicketMenuItem_BuffetTicket" FromRole="BuffetTicketMenuItem" ToRole="BuffetTicket" />
+    <NavigationProperty Name="MenuItem" Relationship="Self.FK_BuffetTicketMenuItem_MenuItem" FromRole="BuffetTicketMenuItem" ToRole="MenuItem" />
+  </EntityType>
+  <EntityType Name="BuffetTicketTimeSlot">
+    <Key>
+      <PropertyRef Name="BuffetTicketTimeSlotID" />
+    </Key>
+    <Property Name="BuffetTicketTimeSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuffetTicketID" Type="Int32" Nullable="false" />
+    <Property Name="DiscountPrice" Type="Int32" Nullable="false" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="BuffetTicket" Relationship="Self.FK_BuffetTicketTimeSlot_BuffetTicket" FromRole="BuffetTicketTimeSlot" ToRole="BuffetTicket" />
+  </EntityType>
+  <EntityType Name="CategoryFood">
+    <Key>
+      <PropertyRef Name="CategoryFoodID" />
+    </Key>
+    <Property Name="CategoryFoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="MenuItems" Relationship="Self.FK_MenuItem_CategoryFood" FromRole="CategoryFood" ToRole="MenuItem" />
+  </EntityType>
+  <EntityType Name="MenuItem">
+    <Key>
+      <PropertyRef Name="MenuItemID" />
+    </Key>
+    <Property Name="MenuItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryFoodID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="BuffetTicketMenuItems" Relationship="Self.FK_BuffetTicketMenuItem_MenuItem" FromRole="MenuItem" ToRole="BuffetTicketMenuItem" />
+    <NavigationProperty Name="CategoryFood" Relationship="Self.FK_MenuItem_CategoryFood" FromRole="MenuItem" ToRole="CategoryFood" />
+  </EntityType>
+  <EntityType Name="ServingTable">
+    <Key>
+      <PropertyRef Name="ServingTableID" />
+    </Key>
+    <Property Name="ServingTableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServingTableCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_BuffetTicketMenuItem_BuffetTicket">
+    <End Role="BuffetTicket" Type="Self.BuffetTicket" Multiplicity="1" />
+    <End Role="BuffetTicketMenuItem" Type="Self.BuffetTicketMenuItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuffetTicket">
+        <PropertyRef Name="BuffetTicketID" />
+      </Principal>
+      <Dependent Role="BuffetTicketMenuItem">
+        <PropertyRef Name="BuffetTicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuffetTicketTimeSlot_BuffetTicket">
+    <End Role="BuffetTicket" Type="Self.BuffetTicket" Multiplicity="1" />
+    <End Role="BuffetTicketTimeSlot" Type="Self.BuffetTicketTimeSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuffetTicket">
+        <PropertyRef Name="BuffetTicketID" />
+      </Principal>
+      <Dependent Role="BuffetTicketTimeSlot">
+        <PropertyRef Name="BuffetTicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuffetTicketMenuItem_MenuItem">
+    <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+    <End Role="BuffetTicketMenuItem" Type="Self.BuffetTicketMenuItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuItem">
+        <PropertyRef Name="MenuItemID" />
+      </Principal>
+      <Dependent Role="BuffetTicketMenuItem">
+        <PropertyRef Name="MenuItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenuItem_CategoryFood">
+    <End Role="CategoryFood" Type="Self.CategoryFood" Multiplicity="1" />
+    <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryFood">
+        <PropertyRef Name="CategoryFoodID" />
+      </Principal>
+      <Dependent Role="MenuItem">
+        <PropertyRef Name="CategoryFoodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DocNetFinalDataBase" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BuffetTickets" EntityType="Self.BuffetTicket" />
+    <EntitySet Name="BuffetTicketMenuItems" EntityType="Self.BuffetTicketMenuItem" />
+    <EntitySet Name="BuffetTicketTimeSlots" EntityType="Self.BuffetTicketTimeSlot" />
+    <EntitySet Name="CategoryFoods" EntityType="Self.CategoryFood" />
+    <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
+    <EntitySet Name="ServingTables" EntityType="Self.ServingTable" />
+    <AssociationSet Name="FK_BuffetTicketMenuItem_BuffetTicket" Association="Self.FK_BuffetTicketMenuItem_BuffetTicket">
+      <End Role="BuffetTicket" EntitySet="BuffetTickets" />
+      <End Role="BuffetTicketMenuItem" EntitySet="BuffetTicketMenuItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuffetTicketTimeSlot_BuffetTicket" Association="Self.FK_BuffetTicketTimeSlot_BuffetTicket">
+      <End Role="BuffetTicket" EntitySet="BuffetTickets" />
+      <End Role="BuffetTicketTimeSlot" EntitySet="BuffetTicketTimeSlots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuffetTicketMenuItem_MenuItem" Association="Self.FK_BuffetTicketMenuItem_MenuItem">
+      <End Role="MenuItem" EntitySet="MenuItems" />
+      <End Role="BuffetTicketMenuItem" EntitySet="BuffetTicketMenuItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenuItem_CategoryFood" Association="Self.FK_MenuItem_CategoryFood">
+      <End Role="CategoryFood" EntitySet="CategoryFoods" />
+      <End Role="MenuItem" EntitySet="MenuItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
